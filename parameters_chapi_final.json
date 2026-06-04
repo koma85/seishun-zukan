@@ -1,0 +1,302 @@
+{
+  "tenjin": {
+    "label": "天神",
+    "parameters": {
+      "seishun": 53,
+      "iyashi": 36,
+      "kodo": 93,
+      "chisei": 30,
+      "wakuwaku": 90,
+      "yorimichi": 90
+    },
+    "dataFlavor": "地下鉄乗車数が10エリア中最高水準。飲食店・屋台の密集度も突出しており、行動力・ワクワク力・寄り道力の三冠を記録",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "hakata": {
+    "label": "博多",
+    "parameters": {
+      "seishun": 74,
+      "iyashi": 55,
+      "kodo": 88,
+      "chisei": 55,
+      "wakuwaku": 79,
+      "yorimichi": 72
+    },
+    "dataFlavor": "新幹線・JR・地下鉄が交差する結節点補正を加算。転入者数の多さと多業態飲食集積が「玄関口の活気」を数値化",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "nishijin": {
+    "label": "西新",
+    "parameters": {
+      "seishun": 68,
+      "iyashi": 30,
+      "kodo": 54,
+      "chisei": 30,
+      "wakuwaku": 31,
+      "yorimichi": 40
+    },
+    "dataFlavor": "転入者数と商店街エリアの飲食密度から若者エネルギーの高さを判定。区単位データの粗さを信頼係数で調整済み",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "ropponmatsu": {
+    "label": "六本松",
+    "parameters": {
+      "seishun": 35,
+      "iyashi": 35,
+      "kodo": 30,
+      "chisei": 78,
+      "wakuwaku": 32,
+      "yorimichi": 62
+    },
+    "dataFlavor": "九大移転後の学術街補正・最低保証を適用。データが捕捉しにくい学生集積とカフェ密度を知性力・寄り道力に反映",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "ohashi": {
+    "label": "大橋",
+    "parameters": {
+      "seishun": 47,
+      "iyashi": 55,
+      "kodo": 48,
+      "chisei": 30,
+      "wakuwaku": 30,
+      "yorimichi": 39
+    },
+    "dataFlavor": "南区の豊富な公園数とスポーツ施設が癒やし力を支える。七隈線沿線らしい落ち着きのある数値分布",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "kashii": {
+    "label": "香椎",
+    "parameters": {
+      "seishun": 90,
+      "iyashi": 65,
+      "kodo": 34,
+      "chisei": 62,
+      "wakuwaku": 37,
+      "yorimichi": 50
+    },
+    "dataFlavor": "東区は転入・出生・公園・施設すべてで市内トップクラス。上限キャップで他エリアとのバランスを保ちつつ青春力は群を抜く",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "meinohama": {
+    "label": "姪浜",
+    "parameters": {
+      "seishun": 37,
+      "iyashi": 80,
+      "kodo": 45,
+      "chisei": 60,
+      "wakuwaku": 33,
+      "yorimichi": 44
+    },
+    "dataFlavor": "公園・スポーツ施設の充実と文化補正が癒やし力80を実現。図書館2館が知性力も底上げ。のんびり海側住宅街の実態に即した分布",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "yakuin": {
+    "label": "薬院",
+    "parameters": {
+      "seishun": 53,
+      "iyashi": 30,
+      "kodo": 30,
+      "chisei": 30,
+      "wakuwaku": 47,
+      "yorimichi": 72
+    },
+    "dataFlavor": "飲食許可数では表現しきれないカフェ・セレクトショップ密集を最低保証で補完。深夜の寄り道文化が寄り道力72を形成",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "hirao": {
+    "label": "平尾",
+    "parameters": {
+      "seishun": 48,
+      "iyashi": 36,
+      "kodo": 39,
+      "chisei": 30,
+      "wakuwaku": 30,
+      "yorimichi": 55
+    },
+    "dataFlavor": "住宅街の隠れ家カフェ文化をキャラ補正・最低保証で数値化。閑静さの中の寄り道力が個性",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  },
+  "momochi": {
+    "label": "百道",
+    "parameters": {
+      "seishun": 33,
+      "iyashi": 31,
+      "kodo": 39,
+      "chisei": 54,
+      "wakuwaku": 68,
+      "yorimichi": 30
+    },
+    "dataFlavor": "福岡タワー・PayPayドーム・海浜公園のイベント感をキャラ・文化補正で反映。ワクワク力が知性力を上回る逆転構造",
+    "dataSources": [
+      "福岡市人口動態調査（2026年4月）",
+      "都市公園データ（2018年）",
+      "スポーツ施設データ（2025年）",
+      "地下鉄乗車人員統計（令和6年度）",
+      "図書館データ（2025年）",
+      "飲食店営業許可データ（2026年4月）",
+      "屋台オープンデータ（2026年5月）"
+    ],
+    "scoringMeta": {
+      "formula": "clamp(max(round(baseScore * reliability + characterBonus + cultureBonus), minimumScore), 30, 98)",
+      "reliability": {
+        "ward": 0.82,
+        "station": 0.95,
+        "address": 0.92,
+        "street": 1.0
+      }
+    }
+  }
+}
