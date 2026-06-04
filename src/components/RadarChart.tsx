@@ -12,16 +12,18 @@ const PARAM_LABELS: { key: keyof Parameters; label: string }[] = [
 ];
 
 const N = PARAM_LABELS.length;
-const SIZE = 200;
-const CENTER = SIZE / 2;
-const MAX_RADIUS = 80;
-const LABEL_OFFSET = 20;
+const W = 260;
+const H = 220;
+const CX = W / 2;
+const CY = H / 2;
+const MAX_RADIUS = 72;
+const LABEL_OFFSET = 22;
 
 function polarToCartesian(angle: number, radius: number) {
   const rad = (angle - 90) * (Math.PI / 180);
   return {
-    x: CENTER + radius * Math.cos(rad),
-    y: CENTER + radius * Math.sin(rad),
+    x: CX + radius * Math.cos(rad),
+    y: CY + radius * Math.sin(rad),
   };
 }
 
@@ -48,7 +50,7 @@ export default function RadarChart({ parameters, color = "#FF7A5C" }: RadarChart
   const gridLevels = [25, 50, 75, 100];
 
   return (
-    <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="w-full max-w-xs mx-auto">
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs mx-auto">
       {/* Grid circles */}
       {gridLevels.map((level) => {
         const gridPoints = Array.from({ length: N }, (_, i) => {
@@ -75,8 +77,8 @@ export default function RadarChart({ parameters, color = "#FF7A5C" }: RadarChart
         return (
           <line
             key={i}
-            x1={CENTER}
-            y1={CENTER}
+            x1={CX}
+            y1={CY}
             x2={x}
             y2={y}
             stroke="#E5E0D8"
@@ -110,7 +112,7 @@ export default function RadarChart({ parameters, color = "#FF7A5C" }: RadarChart
         const angle = (360 / N) * i;
         const { x, y } = polarToCartesian(angle, MAX_RADIUS + LABEL_OFFSET);
         const textAnchor =
-          Math.abs(x - CENTER) < 5 ? "middle" : x < CENTER ? "end" : "start";
+          Math.abs(x - CX) < 5 ? "middle" : x < CX ? "end" : "start";
         return (
           <text
             key={i}
