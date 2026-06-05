@@ -69,21 +69,30 @@ export default function TopPage() {
       )}
 
       {/* Action buttons */}
-      <section className="grid grid-cols-2 gap-4">
-        <Link href="/diagnosis">
+      <section className="space-y-3">
+        <Link href="/discover">
           <div className="bg-coral text-white rounded-2xl p-5 text-center hover:bg-coral/80 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 transform cursor-pointer">
-            <div className="text-3xl mb-2">🧬</div>
-            <p className="font-bold text-sm">診断する</p>
-            <p className="text-xs opacity-80 mt-1">5問で自分の青春タイプを発見</p>
+            <div className="text-3xl mb-2">🔭</div>
+            <p className="font-bold text-sm">モンスターを探索する</p>
+            <p className="text-xs opacity-80 mt-1">今の気分からシルエットを選んで発見</p>
           </div>
         </Link>
-        <Link href="/zukan">
-          <div className="bg-navy text-white rounded-2xl p-5 text-center hover:bg-navy/80 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 transform cursor-pointer">
-            <div className="text-3xl mb-2">📖</div>
-            <p className="font-bold text-sm">図鑑を見る</p>
-            <p className="text-xs opacity-80 mt-1">24種の青春モンスターを確認</p>
-          </div>
-        </Link>
+        <div className="grid grid-cols-2 gap-3">
+          <Link href="/diagnosis">
+            <div className="bg-navy text-white rounded-2xl p-5 text-center hover:bg-navy/80 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 transform cursor-pointer">
+              <div className="text-2xl mb-1">🧬</div>
+              <p className="font-bold text-sm">診断する</p>
+              <p className="text-xs opacity-80 mt-1">5問でタイプ診断</p>
+            </div>
+          </Link>
+          <Link href="/zukan">
+            <div className="bg-white border-2 border-navy text-navy rounded-2xl p-5 text-center hover:bg-cream transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 transform cursor-pointer">
+              <div className="text-2xl mb-1">📖</div>
+              <p className="font-bold text-sm">図鑑を見る</p>
+              <p className="text-xs opacity-60 mt-1">24種を確認</p>
+            </div>
+          </Link>
+        </div>
       </section>
 
       {/* About */}

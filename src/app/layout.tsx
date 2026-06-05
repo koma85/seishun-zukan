@@ -41,6 +41,12 @@ export default function RootLayout({
                   図鑑
                 </Link>
                 <Link
+                  href="/discover"
+                  className="text-sm text-navy hover:text-coral transition-colors font-medium"
+                >
+                  探索
+                </Link>
+                <Link
                   href="/diagnosis"
                   className="text-sm bg-coral text-white px-3 py-1.5 rounded-full hover:bg-coral/80 transition-colors font-medium"
                 >
