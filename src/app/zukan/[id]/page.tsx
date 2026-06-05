@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import { getMonsterById } from "@/data/monsters";
 import { useZukan } from "@/context/ZukanContext";
@@ -25,12 +25,12 @@ function dominantParamKey(params: Monster["parameters"]): string {
 
 export default function MonsterDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const id = typeof params.id === "string" ? params.id : "";
   const monster = getMonsterById(id);
   const { discover, isDiscovered } = useZukan();
   const [luckyPoint, setLuckyPoint] = useState<string | null>(null);
   const [showDiscovery, setShowDiscovery] = useState(false);
+  const [showDataSource, setShowDataSource] = useState(false);
 
   useEffect(() => {
     if (!monster) return;
@@ -131,6 +131,39 @@ export default function MonsterDetailPage() {
         <div className="mt-4">
           <ParameterBar parameters={monster.parameters} />
         </div>
+
+        {/* Data source accordion */}
+        <button
+          onClick={() => setShowDataSource((v) => !v)}
+          className="mt-4 flex items-center gap-1 text-xs text-gray-400 hover:text-coral transition-colors w-full"
+        >
+          <span className={`transition-transform duration-200 ${showDataSource ? "rotate-90" : ""}`}>▶</span>
+          <span>どうしてこの数字？</span>
+        </button>
+
+        {showDataSource && (
+          <div className="mt-3 space-y-3 animate-fade-in border-t border-orange-50 pt-3">
+            <p className="text-xs text-gray-500 leading-relaxed">{monster.dataFlavor}</p>
+            <ul className="space-y-1">
+              {monster.scoringEvidence.map((ev, i) => (
+                <li key={i} className="text-xs text-gray-400 flex gap-1.5">
+                  <span className="text-coral/60 shrink-0 mt-0.5">・</span>
+                  <span>{ev}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-1 pt-1">
+              {monster.dataSources.map((src) => (
+                <span
+                  key={src}
+                  className="text-xs bg-cream text-gray-400 px-2 py-0.5 rounded-full border border-orange-100"
+                >
+                  {src}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Ecology */}
@@ -153,22 +186,6 @@ export default function MonsterDetailPage() {
             </li>
           ))}
         </ul>
-      </div>
-
-      {/* Data flavor & sources */}
-      <div className="bg-white rounded-2xl p-5 border border-orange-100 space-y-3">
-        <h2 className="text-sm font-bold text-navy">データ由来</h2>
-        <p className="text-xs text-gray-500 leading-relaxed">{monster.dataFlavor}</p>
-        <div className="flex flex-wrap gap-1 mt-2">
-          {monster.dataSources.map((src) => (
-            <span
-              key={src}
-              className="text-xs bg-cream text-gray-500 px-2 py-0.5 rounded-full border border-orange-100"
-            >
-              {src}
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* SNS share */}

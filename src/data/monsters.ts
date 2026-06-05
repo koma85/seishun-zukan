@@ -43,6 +43,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 53, iyashi: 36, kodo: 93, chisei: 30, wakuwaku: 90, yorimichi: 90 },
     dataFlavor:
       "地下鉄乗車数が10エリア中最高水準。飲食店・屋台の密集度も突出しており、行動力・ワクワク力・寄り道力の三冠を記録",
+    scoringEvidence: [
+      "地下鉄乗車数: 中央区 約4,600万人/年（市内最多）→ 行動力の基礎値が最高水準",
+      "飲食店数: 中央区 約7,200件（市内最多）→ ワクワク力・寄り道力を押し上げ",
+      "屋台: 天神・中洲エリアに集中 → 寄り道力の上乗せ要因",
+      "キャラ補正なし（データのみで三冠を達成）",
+    ],
     dataSources: commonDataSources,
     compatibility: ["explorer", "enthusiast", "wanderer"],
   },
@@ -68,6 +74,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 74, iyashi: 55, kodo: 88, chisei: 55, wakuwaku: 79, yorimichi: 72 },
     dataFlavor:
       "新幹線・JR・地下鉄が交差する結節点補正を加算。転入者数の多さと多業態飲食集積が「玄関口の活気」を数値化",
+    scoringEvidence: [
+      "地下鉄乗車数: 博多駅 約1,900万人/年",
+      "転入者数: 博多区 約22,000人/年",
+      "キャラ補正: 行動力+30（新幹線・JR交差点の特例補正）",
+      "文化補正: 行動力+10",
+      "最低保証: 行動力≥88 を適用",
+    ],
     dataSources: commonDataSources,
     compatibility: ["explorer", "native", "enthusiast"],
   },
@@ -93,6 +106,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 68, iyashi: 30, kodo: 54, chisei: 30, wakuwaku: 31, yorimichi: 40 },
     dataFlavor:
       "転入者数と商店街エリアの飲食密度から若者エネルギーの高さを判定。区単位データの粗さを信頼係数で調整済み",
+    scoringEvidence: [
+      "転入者数: 早良区 約13,000人/年",
+      "西新商店街: 飲食・小売が密集するアーケード商店街",
+      "キャラ補正: 青春力+12（商店街の若年文化）",
+      "文化補正: 青春力+8",
+      "最低保証: 青春力≥68 を適用",
+    ],
     dataSources: commonDataSources,
     compatibility: ["native", "explorer", "wanderer"],
   },
@@ -118,6 +138,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 35, iyashi: 35, kodo: 30, chisei: 78, wakuwaku: 32, yorimichi: 62 },
     dataFlavor:
       "九大移転後の学術街補正・最低保証を適用。データが捕捉しにくい学生集積とカフェ密度を知性力・寄り道力に反映",
+    scoringEvidence: [
+      "福岡市中央図書館: 市内最大の図書館が立地",
+      "九大移転後も残る学術気配をキャラ補正で反映",
+      "キャラ補正: 知性力+30, 寄り道力+18",
+      "文化補正: 知性力+10, 寄り道力+8",
+      "最低保証: 知性力≥78, 寄り道力≥62",
+    ],
     dataSources: commonDataSources,
     compatibility: ["scholar", "wanderer", "native"],
   },
@@ -143,6 +170,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 47, iyashi: 55, kodo: 48, chisei: 30, wakuwaku: 30, yorimichi: 39 },
     dataFlavor:
       "南区の豊富な公園数とスポーツ施設が癒やし力を支える。七隈線沿線らしい落ち着きのある数値分布",
+    scoringEvidence: [
+      "都市公園: 南区 約230か所（市内2位水準）",
+      "スポーツ施設: 南区 上位水準",
+      "飲食店数は少なく、ワクワク力・青春力は低め",
+      "キャラ補正なし（データが実態を適切に反映）",
+    ],
     dataSources: commonDataSources,
     compatibility: ["healer", "native", "explorer"],
   },
@@ -168,6 +201,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 90, iyashi: 65, kodo: 39, chisei: 62, wakuwaku: 40, yorimichi: 50 },
     dataFlavor:
       "東区は転入・出生・公園・施設すべてで市内トップクラス。上限キャップで他エリアとのバランスを保ちつつ青春力は群を抜く",
+    scoringEvidence: [
+      "転入者数: 東区 約28,000人/年（市内最多）",
+      "都市公園: 東区 約330か所（市内最多）",
+      "出生数: 東区 市内上位水準",
+      "キャラ補正: 青春力+5（出生数・若年ファミリーの多さ）",
+      "上限キャップ: 癒し力≤82, 知性力≤72（他エリアとのバランス調整）",
+    ],
     dataSources: commonDataSources,
     compatibility: ["native", "healer", "scholar"],
   },
@@ -193,6 +233,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 37, iyashi: 80, kodo: 45, chisei: 60, wakuwaku: 33, yorimichi: 44 },
     dataFlavor:
       "公園・スポーツ施設の充実と文化補正が癒やし力80を実現。図書館2館が知性力も底上げ。のんびり海側住宅街の実態に即した分布",
+    scoringEvidence: [
+      "都市公園・スポーツ施設: 西区 充実",
+      "図書館: 西区 2館（知性力に貢献）",
+      "キャラ補正: 癒し力+15（海沿いの自然環境と穏やかさ）",
+      "文化補正: 癒し力+8",
+      "最低保証: 癒し力≥70 → 実測80に到達",
+    ],
     dataSources: commonDataSources,
     compatibility: ["healer", "scholar", "explorer"],
   },
@@ -218,6 +265,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 53, iyashi: 30, kodo: 30, chisei: 30, wakuwaku: 47, yorimichi: 72 },
     dataFlavor:
       "飲食許可数では表現しきれないカフェ・セレクトショップ密集を最低保証で補完。深夜の寄り道文化が寄り道力72を形成",
+    scoringEvidence: [
+      "飲食許可データ: 薬院住所キーワードで集計",
+      "カフェ・セレクトショップの密集は許可データに出にくい",
+      "キャラ補正: 寄り道力+25（深夜の寄り道・路地文化）",
+      "文化補正: 寄り道力+10",
+      "最低保証: 寄り道力≥72 を適用",
+    ],
     dataSources: commonDataSources,
     compatibility: ["wanderer", "enthusiast", "native"],
   },
@@ -243,6 +297,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 48, iyashi: 36, kodo: 39, chisei: 30, wakuwaku: 30, yorimichi: 55 },
     dataFlavor:
       "住宅街の隠れ家カフェ文化をキャラ補正・最低保証で数値化。閑静さの中の寄り道力が個性",
+    scoringEvidence: [
+      "飲食店: 分散・小規模が多く件数は少ない",
+      "隠れ家カフェ文化はデータに出にくい → キャラ補正で対応",
+      "キャラ補正: 寄り道力+22, 癒し力+8",
+      "最低保証: 寄り道力≥55（データ不足を補完）",
+      "青春力・ワクワク力は補正なしの純データのまま",
+    ],
     dataSources: commonDataSources,
     compatibility: ["wanderer", "native", "explorer"],
   },
@@ -268,6 +329,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 33, iyashi: 31, kodo: 39, chisei: 54, wakuwaku: 68, yorimichi: 30 },
     dataFlavor:
       "福岡タワー・PayPayドーム・海浜公園のイベント感をキャラ・文化補正で反映。ワクワク力が知性力を上回る逆転構造",
+    scoringEvidence: [
+      "文化施設: 福岡タワー・PayPayドーム・市博物館が集中",
+      "キャラ補正: ワクワク力+15（イベント集積）",
+      "文化補正: ワクワク力+10",
+      "最低保証: ワクワク力≥68",
+      "上限キャップ: 知性力≤62（文化施設があっても体験型優先）",
+    ],
     dataSources: commonDataSources,
     compatibility: ["enthusiast", "scholar", "explorer"],
   },
@@ -294,6 +362,12 @@ export const monsters: Monster[] = [
     },
     parameters: { seishun: 33, iyashi: 52, kodo: 55, chisei: 49, wakuwaku: 72, yorimichi: 35 },
     dataFlavor: "観光集客実績と周辺複合施設の密度から、ワクワク力が主軸で行動力が補完する判定となった",
+    scoringEvidence: [
+      "展望台入場者数: 年間約100万人",
+      "周辺: ヒルトンFUKUOKA・TNC放送会館・シーサイドももち海浜公園",
+      "住所キーワード集計（信頼係数0.92）",
+      "ワクワク力主軸、行動力が補完",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["enthusiast", "explorer", "scholar"],
   },
@@ -318,6 +392,12 @@ export const monsters: Monster[] = [
     },
     parameters: { seishun: 68, iyashi: 36, kodo: 45, chisei: 30, wakuwaku: 75, yorimichi: 30 },
     dataFlavor: "大規模イベント開催実績と周辺の若年人口流入データから、ワクワク力と青春力が高く判定された",
+    scoringEvidence: [
+      "年間来場者数: 約200万人（試合＋コンサート等イベント）",
+      "若年層の来場比率が高くイベント件数も多い",
+      "住所キーワード集計（信頼係数0.92）",
+      "ワクワク力・青春力が連動した数値構造",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["enthusiast", "native", "explorer"],
   },
@@ -343,6 +423,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 84, iyashi: 55, kodo: 98, chisei: 65, wakuwaku: 45, yorimichi: 46 },
     dataFlavor:
       "地下鉄・新幹線・バスの乗降者数が市内で断トツとなり、行動力と青春力が最上位に近い値で判定された",
+    scoringEvidence: [
+      "地下鉄博多駅乗降: 約1,900万人/年",
+      "JR・新幹線乗降: 全24件中最大規模",
+      "行動力98: 全24件中最高値",
+      "飲食・商業施設の集積もトップ水準",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["explorer", "native", "scholar"],
   },
@@ -368,6 +454,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 59, iyashi: 55, kodo: 31, chisei: 58, wakuwaku: 80, yorimichi: 65 },
     dataFlavor:
       "複合商業施設としての面積規模と飲食店種類の多様性から、ワクワク力と寄り道力が共に高く判定された",
+    scoringEvidence: [
+      "年間来館者数: 約1,600万人",
+      "施設内飲食店: 60店舗超",
+      "映画館・ホテル・劇場の複合施設",
+      "ワクワク力・寄り道力を両立した希少な数値構造",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["enthusiast", "wanderer", "scholar"],
   },
@@ -393,6 +485,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 53, iyashi: 92, kodo: 50, chisei: 30, wakuwaku: 30, yorimichi: 47 },
     dataFlavor:
       "水辺緑地の規模と市内中心部からのアクセス良好度が組み合わさり、癒し力と青春力が高く判定された",
+    scoringEvidence: [
+      "公園面積: 約39ha（池・緑地含む）",
+      "市内中心部から地下鉄で約5分",
+      "年間利用者: 推計200万人超",
+      "隣接する福岡市美術館との相乗効果",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["healer", "native", "explorer"],
   },
@@ -418,6 +516,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 53, iyashi: 79, kodo: 50, chisei: 60, wakuwaku: 31, yorimichi: 32 },
     dataFlavor:
       "城跡公園としての面積と隣接する文化施設の数から、癒し力と知性力が高く判定された",
+    scoringEvidence: [
+      "公園面積: 約40ha（福岡城跡含む）",
+      "桜の名所: 春季は来場者数が大幅増",
+      "隣接: 福岡市美術館・三の丸スクエア",
+      "歴史的石垣・堀が知性力の文化価値を形成",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["healer", "scholar", "native"],
   },
@@ -443,6 +547,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 95, iyashi: 98, kodo: 30, chisei: 80, wakuwaku: 65, yorimichi: 43 },
     dataFlavor:
       "観光施設としての入場者数規模と周辺の若年ファミリー人口から、癒し力と青春力が最上位水準で判定された",
+    scoringEvidence: [
+      "年間入場者数: 約90万人",
+      "東区の若年ファミリー人口の多さが来場を後押し",
+      "癒し力98・青春力95: 全24件中最上位水準",
+      "住所キーワード集計（信頼係数0.92）",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["healer", "native", "scholar"],
   },
@@ -468,6 +578,13 @@ export const monsters: Monster[] = [
     parameters: { seishun: 30, iyashi: 90, kodo: 42, chisei: 30, wakuwaku: 30, yorimichi: 30 },
     dataFlavor:
       "山系緑地としての面積と市街地からの高度差から、癒し力が最大級で行動力が補助的に機能する判定となった",
+    scoringEvidence: [
+      "山系緑地面積: 約1,000ha",
+      "市街地から車で約20分（移動コストあり）",
+      "周辺の飲食店・施設データは極めて薄い",
+      "癒し力90: 補正なしの純データで達成",
+      "行動力・知性力・青春力は下限近く（データ不足）",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["healer", "explorer", "native"],
   },
@@ -495,6 +612,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 84, iyashi: 55, kodo: 31, chisei: 98, wakuwaku: 60, yorimichi: 36 },
     dataFlavor:
       "祭礼文化施設としての歴史的集積と周辺の飲食・観光施設密度から、知性力と青春力が高く判定された",
+    scoringEvidence: [
+      "博多祇園山笠の総本社（1,000年以上の歴史）",
+      "年間参拝者: 約100万人",
+      "博多旧市街の文化集積の中心に位置",
+      "知性力98: 歴史・文化データが全24件中最高値",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["scholar", "native", "enthusiast"],
     luckyPoints: [
@@ -527,6 +650,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 45, iyashi: 82, kodo: 31, chisei: 72, wakuwaku: 30, yorimichi: 35 },
     dataFlavor:
       "歴史的寺院建築の密集度と周辺観光施設との補完関係から、癒し力と知性力が高く判定された",
+    scoringEvidence: [
+      "日本最大級の木造坐像（福岡大仏）が境内に鎮座",
+      "五重塔: 福岡市内で唯一現存する五重塔",
+      "博多旧市街の喧騒エリアから徒歩数分の静寂地帯",
+      "癒し力・知性力が連動した数値構造",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["healer", "scholar", "native"],
     luckyPoints: [
@@ -559,6 +688,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 98, iyashi: 90, kodo: 33, chisei: 75, wakuwaku: 30, yorimichi: 43 },
     dataFlavor:
       "祭礼規模と海岸線への近接度、若年参拝者の流入データから、青春力と癒し力が高く判定された",
+    scoringEvidence: [
+      "日本三大八幡の一つ（蒙古来襲を退けた歴史的背景）",
+      "放生会: 九州最大の秋祭り（約100万人来場）",
+      "博多湾に近い立地が青春力・癒し力に貢献",
+      "青春力98: 全24件中最高値",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["native", "healer", "scholar"],
     luckyPoints: [
@@ -591,6 +726,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 82, iyashi: 55, kodo: 33, chisei: 98, wakuwaku: 33, yorimichi: 60 },
     dataFlavor:
       "市内最古の鎮守としての歴史的密度と周辺生活圏との一体化から、知性力と青春力が高く判定された",
+    scoringEvidence: [
+      "全国住吉神社の発祥地（2,000年以上の歴史）",
+      "博多旧市街の最古の鎮守",
+      "地元民の日常参拝比率が観光客より高い",
+      "知性力98: 歴史的密度が全24件中最高値",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["scholar", "native", "wanderer"],
     luckyPoints: [
@@ -623,6 +764,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 63, iyashi: 36, kodo: 91, chisei: 30, wakuwaku: 75, yorimichi: 60 },
     dataFlavor:
       "天神繁華街中心部という立地と周辺飲食・商業施設の密集度から、行動力とワクワク力が高く判定された",
+    scoringEvidence: [
+      "天神の商業集積エリアの中心部に立地",
+      "24時間参拝可能（深夜でも参拝者が途絶えない）",
+      "行動力91: 天神の移動エネルギーを吸収した結果",
+      "ワクワク力75: 周辺繁華街のデータと連動",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["explorer", "enthusiast", "native"],
     luckyPoints: [
@@ -655,6 +802,12 @@ export const monsters: Monster[] = [
     parameters: { seishun: 37, iyashi: 98, kodo: 49, chisei: 90, wakuwaku: 30, yorimichi: 35 },
     dataFlavor:
       "市街地眺望という地理的優位性と歴史的火防の神としての認知度から、癒し力と知性力が高く判定された",
+    scoringEvidence: [
+      "標高68メートルの愛宕山頂に鎮座",
+      "福岡市街地・玄界灘・能古島を一望できる立地",
+      "周辺飲食店: 2件（データ極薄）",
+      "愛宕神社方式: 市民感覚で特例採用し、キャラ補正で数値を設定",
+    ],
     dataSources: landmarkDataSources,
     compatibility: ["healer", "scholar", "native"],
     luckyPoints: [

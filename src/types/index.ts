@@ -33,6 +33,7 @@ export interface Monster {
   researchNote: ResearchNote;
   parameters: Parameters;
   dataFlavor: string;
+  scoringEvidence: string[];
   dataSources: string[];
   compatibility: DiagnosisTypeId[];
   luckyPoints?: string[];
