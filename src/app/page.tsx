@@ -97,7 +97,12 @@ export default function TopPage() {
 
       {/* About */}
       <section className="bg-white rounded-2xl p-5 border border-orange-100 space-y-3">
-        <h2 className="font-bold text-navy text-sm">このサービスについて</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="font-bold text-navy text-sm">このサービスについて</h2>
+          <Link href="/howto" className="text-xs text-coral font-medium hover:underline">
+            遊び方を見る →
+          </Link>
+        </div>
         <p className="text-xs text-gray-500 leading-relaxed">
           福岡市のオープンデータ（人口動態・交通・施設・飲食店など）をエンタメ向けに解析し、
           街や施設の個性を「青春生物」として可視化しています。

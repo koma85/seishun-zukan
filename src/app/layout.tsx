@@ -62,7 +62,13 @@ export default function RootLayout({
           </main>
 
           {/* Footer */}
-          <footer className="border-t border-orange-100 py-6 text-center">
+          <footer className="border-t border-orange-100 py-6 text-center space-y-2">
+            <div className="flex justify-center gap-5 text-xs text-gray-400">
+              <Link href="/howto"     className="hover:text-coral transition-colors">遊び方</Link>
+              <Link href="/zukan"     className="hover:text-coral transition-colors">図鑑</Link>
+              <Link href="/discover"  className="hover:text-coral transition-colors">探索</Link>
+              <Link href="/diagnosis" className="hover:text-coral transition-colors">診断</Link>
+            </div>
             <p className="text-xs text-gray-400">
               © 2026 青春モンスター図鑑 FUKUOKA
               <br />
