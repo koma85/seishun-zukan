@@ -4,72 +4,164 @@ import Link from "next/link";
 import type { Monster } from "@/types";
 import MonsterImage from "@/components/MonsterImage";
 
-interface MonsterCardProps {
-  monster: Monster;
-  discovered: boolean;
-}
-
-const PARAM_COLORS: Record<string, string> = {
-  seishun: "bg-coral",
-  iyashi: "bg-mint",
-  kodo: "bg-sky",
-  chisei: "bg-lavender",
-  wakuwaku: "bg-gold",
-  yorimichi: "bg-coral/70",
+// ─── パラメーターアイコン定義 ─────────────────────────────
+const PARAM_META: Record<string, { icon: string; label: string; hex: string }> = {
+  seishun:   { icon: "🌸", label: "青春",    hex: "#FF7A5C" },
+  iyashi:    { icon: "🌿", label: "癒し",    hex: "#5DD9C1" },
+  kodo:      { icon: "⚡", label: "行動",    hex: "#5BB8FF" },
+  chisei:    { icon: "📖", label: "知性",    hex: "#B8A9FF" },
+  wakuwaku:  { icon: "✨", label: "ワクワク", hex: "#FFB830" },
+  yorimichi: { icon: "🗺️", label: "寄道",    hex: "#FF9E8A" },
 };
 
-const PARAM_LABELS: Record<string, string> = {
-  seishun: "青春力",
-  iyashi: "癒やし力",
-  kodo: "行動力",
-  chisei: "知性力",
-  wakuwaku: "ワクワク力",
-  yorimichi: "寄り道力",
-};
+// ─── カード枠スタイル（ティア別）───────────────────────────
+const FRAME = {
+  ssr:   {
+    border: "#FFB830",
+    glow:   "0 0 18px rgba(255,184,48,0.5), 0 4px 14px rgba(255,184,48,0.25)",
+    header: "linear-gradient(135deg, #FFB830 0%, #FF7A5C 100%)",
+    label:  "⛩ SSR",
+  },
+  tier2: {
+    border: "#B8A9FF",
+    glow:   "0 4px 14px rgba(184,169,255,0.3)",
+    header: "linear-gradient(135deg, #B8A9FF 0%, #5BB8FF 100%)",
+    label:  "🏛 ランドマーク",
+  },
+  tier1: {
+    border: "#5BB8FF",
+    glow:   "0 4px 12px rgba(91,184,255,0.25)",
+    header: "linear-gradient(135deg, #5BB8FF 0%, #5DD9C1 100%)",
+    label:  "🏙 街",
+  },
+} as const;
 
-function dominantParam(params: Monster["parameters"]): string {
-  return Object.entries(params).sort((a, b) => b[1] - a[1])[0][0];
+function getFrame(m: Monster) {
+  return m.ssr ? FRAME.ssr : m.tier === 1 ? FRAME.tier1 : FRAME.tier2;
 }
 
-export default function MonsterCard({ monster, discovered }: MonsterCardProps) {
+function topParams(params: Monster["parameters"], n = 3): [string, number][] {
+  return (Object.entries(params) as [string, number][])
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, n);
+}
+
+// ─── コンポーネント ─────────────────────────────────────
+interface Props { monster: Monster; discovered: boolean; }
+
+export default function MonsterCard({ monster, discovered }: Props) {
+  const frame = getFrame(monster);
+
+  // ── 未発見：カードの裏面 ──
   if (!discovered) {
     return (
-      <div className="relative bg-white rounded-2xl border-2 border-dashed border-gray-200 p-4 flex flex-col items-center gap-2 opacity-80">
-        <div className="w-20 h-20 rounded-xl bg-gray-100 flex items-center justify-center">
-          <span className="text-3xl text-gray-300">?</span>
-        </div>
-        <div className="w-24 h-3 bg-gray-200 rounded-full" />
-        <div className="w-16 h-2 bg-gray-100 rounded-full" />
-        <span className="text-xs text-gray-400 mt-1">未発見</span>
+      <div
+        className="relative rounded-2xl overflow-hidden"
+        style={{
+          border: `2px solid ${monster.ssr ? "#FFB830" : "#d1d5db"}`,
+          boxShadow: monster.ssr ? "0 0 14px rgba(255,184,48,0.4)" : "none",
+        }}
+      >
         {monster.ssr && (
-          <span className="absolute top-2 right-2 text-xs font-bold text-amber-400">SSR</span>
+          <div className="absolute inset-0 z-10 overflow-hidden rounded-2xl pointer-events-none">
+            <div className="ssr-shine" />
+          </div>
         )}
+        <div
+          className="relative flex flex-col items-center justify-center gap-2.5 min-h-[200px] px-3 py-5"
+          style={{ background: "linear-gradient(160deg, #1a2b4a 0%, #0d1929 100%)" }}
+        >
+          {/* 斜めストライプ柄 */}
+          <div
+            className="absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
+              backgroundSize: "10px 10px",
+            }}
+          />
+          {monster.ssr && (
+            <span className="relative z-10 text-[10px] font-bold text-amber-400 border border-amber-400/50 px-2 py-0.5 rounded-full tracking-widest">
+              ★ SSR
+            </span>
+          )}
+          <div className="relative z-10 w-14 h-14 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center">
+            <span className="text-3xl text-white/20">?</span>
+          </div>
+          <p className="relative z-10 text-[10px] font-medium text-white/30 tracking-widest">
+            未発見
+          </p>
+        </div>
       </div>
     );
   }
 
-  const dom = dominantParam(monster.parameters);
+  // ── 発見済み：TCGカード風 ──
+  const stats = topParams(monster.parameters, 3);
 
   return (
     <Link href={`/zukan/${monster.id}`}>
-      <div className="relative bg-white rounded-2xl border-2 border-cream hover:border-coral transition-all duration-200 p-4 flex flex-col items-center gap-2 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 transform">
+      <div
+        className="relative rounded-2xl overflow-hidden cursor-pointer bg-white transition-all duration-200 hover:-translate-y-1 hover:scale-[1.02]"
+        style={{
+          border: `2px solid ${frame.border}`,
+          boxShadow: frame.glow,
+        }}
+      >
+        {/* SSR 輝きエフェクト */}
         {monster.ssr && (
-          <span className="absolute top-2 right-2 text-xs font-bold text-amber-500 bg-amber-50 px-1.5 py-0.5 rounded-full">
-            SSR
-          </span>
+          <div className="absolute inset-0 z-20 overflow-hidden rounded-2xl pointer-events-none">
+            <div className="ssr-shine" />
+          </div>
         )}
-        <MonsterImage id={monster.id} name={monster.name} size="sm" className="rounded-xl" />
-        <div className="text-center">
-          <p className="text-xs text-gray-400">{monster.habitat}</p>
-          <p className="font-bold text-navy text-sm">{monster.name}</p>
-        </div>
+
+        {/* ヘッダーストリップ */}
         <div
-          className={`text-xs px-2 py-0.5 rounded-full text-white font-medium ${PARAM_COLORS[dom] ?? "bg-coral"}`}
+          className="flex items-center justify-between px-2.5 py-1.5"
+          style={{ background: frame.header }}
         >
-          {PARAM_LABELS[dom]}
+          <span className="text-[10px] font-bold text-white/90 tracking-wide">
+            {frame.label}
+          </span>
+          <span className="text-[10px] text-white/80 font-medium">
+            {monster.attribute}
+          </span>
+        </div>
+
+        {/* 画像エリア */}
+        <div className="bg-gradient-to-b from-[#FEFBF0] to-white flex justify-center pt-3 pb-1 px-2">
+          <MonsterImage id={monster.id} name={monster.name} size="sm" className="rounded-xl" />
+        </div>
+
+        {/* 名前エリア */}
+        <div className="px-2 pb-1.5 text-center">
+          <p className="font-bold text-navy text-sm leading-tight">{monster.name}</p>
+          <p className="text-[10px] text-gray-400 leading-snug">{monster.habitat}</p>
+        </div>
+
+        {/* 区切り線 */}
+        <div className="mx-2 border-t" style={{ borderColor: `${frame.border}55` }} />
+
+        {/* パラメーター（上位3つ） */}
+        <div className="flex justify-around px-1 py-2">
+          {stats.map(([key, val]) => {
+            const meta = PARAM_META[key];
+            if (!meta) return null;
+            return (
+              <div key={key} className="flex flex-col items-center gap-0.5">
+                <span className="text-sm leading-none">{meta.icon}</span>
+                <span
+                  className="text-xs font-bold leading-none"
+                  style={{ color: meta.hex }}
+                >
+                  {val}
+                </span>
+                <span className="text-[8px] text-gray-400 leading-none">{meta.label}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Link>
   );
 }
-
