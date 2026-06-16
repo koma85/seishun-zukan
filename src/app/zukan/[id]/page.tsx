@@ -8,20 +8,7 @@ import { useZukan } from "@/context/ZukanContext";
 import RadarChart from "@/components/RadarChart";
 import ParameterBar from "@/components/ParameterBar";
 import MonsterImage from "@/components/MonsterImage";
-import type { Monster } from "@/types";
-
-const PARAM_COLOR_MAP: Record<string, string> = {
-  seishun: "#FF7A5C",
-  iyashi: "#5DD9C1",
-  kodo: "#5BB8FF",
-  chisei: "#B8A9FF",
-  wakuwaku: "#FFB830",
-  yorimichi: "#FF9E8A",
-};
-
-function dominantParamKey(params: Monster["parameters"]): string {
-  return Object.entries(params).sort((a, b) => b[1] - a[1])[0][0];
-}
+import { PARAM_META, getFrame, allParamsSorted } from "@/lib/cardFrame";
 
 export default function MonsterDetailPage() {
   const params = useParams();
@@ -60,8 +47,9 @@ export default function MonsterDetailPage() {
     );
   }
 
-  const domKey = dominantParamKey(monster.parameters);
-  const radarColor = PARAM_COLOR_MAP[domKey] ?? "#FF7A5C";
+  const frame = getFrame(monster);
+  const radarColor = frame.border;
+  const allStats = allParamsSorted(monster.parameters);
 
   const shareText = `「${monster.name}」を発見しました。\n${monster.ecology}\n#青春モンスター図鑑 #福岡青春生態調査`;
   const shareUrl = encodeURIComponent(typeof window !== "undefined" ? window.location.href : "");
@@ -83,26 +71,62 @@ export default function MonsterDetailPage() {
         ← 図鑑一覧
       </Link>
 
-      {/* Card header */}
+      {/* Hero card（TCGカード風） */}
       <div
-        className={`rounded-2xl p-6 text-center space-y-2 ${
-          monster.ssr
-            ? "bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200"
-            : "bg-white border border-orange-100"
-        }`}
+        className="relative rounded-2xl overflow-hidden bg-white"
+        style={{
+          border: `2px solid ${frame.border}`,
+          boxShadow: frame.glow,
+        }}
       >
+        {/* SSR 輝きエフェクト */}
         {monster.ssr && (
-          <div className="inline-block bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full mb-1">
-            SSR
+          <div className="absolute inset-0 z-20 overflow-hidden rounded-2xl pointer-events-none">
+            <div className="ssr-shine" />
           </div>
         )}
-        <MonsterImage id={monster.id} name={monster.name} size="lg" className="mx-auto" />
-        <div>
+
+        {/* ヘッダーストリップ */}
+        <div
+          className="flex items-center justify-between px-4 py-2"
+          style={{ background: frame.header }}
+        >
+          <span className="text-xs font-bold text-white/90 tracking-wide">{frame.label}</span>
+          <span className="text-xs text-white/80 font-medium">{monster.attribute}</span>
+        </div>
+
+        {/* 画像エリア */}
+        <div className="bg-gradient-to-b from-[#FEFBF0] to-white flex justify-center pt-6 pb-3">
+          <MonsterImage id={monster.id} name={monster.name} size="lg" />
+        </div>
+
+        {/* 名前エリア */}
+        <div className="px-5 pb-4 text-center space-y-1">
           <p className="text-xs text-gray-400">{monster.habitat}</p>
           <h1 className="text-2xl font-bold text-navy">{monster.name}</h1>
-          <p className="text-xs text-gray-500">{monster.classification} / {monster.attribute}</p>
+          <p className="text-xs text-gray-500">{monster.classification}</p>
+          <p className="text-sm italic text-gray-600 font-medium pt-1">&quot;{monster.catchCopy}&quot;</p>
         </div>
-        <p className="text-sm italic text-gray-600 font-medium">"{monster.catchCopy}"</p>
+
+        {/* 区切り線 */}
+        <div className="mx-4 border-t" style={{ borderColor: `${frame.border}55` }} />
+
+        {/* ステータス（6パラメーター全部） */}
+        <div className="flex justify-around px-1 py-3">
+          {allStats.map(([key, val]) => {
+            const meta = PARAM_META[key];
+            if (!meta) return null;
+            return (
+              <div key={key} className="flex flex-col items-center gap-0.5">
+                <span className="text-base leading-none">{meta.icon}</span>
+                <span className="text-sm font-bold leading-none" style={{ color: meta.hex }}>
+                  {val}
+                </span>
+                <span className="text-[9px] text-gray-400 leading-none">{meta.label}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Lucky point (SSR only) */}
@@ -125,7 +149,10 @@ export default function MonsterDetailPage() {
       )}
 
       {/* Radar chart */}
-      <div className="bg-white rounded-2xl p-5 border border-orange-100">
+      <div
+        className="bg-white rounded-2xl p-5"
+        style={{ border: `1px solid ${frame.border}40` }}
+      >
         <h2 className="text-sm font-bold text-navy mb-4">青春パラメータ</h2>
         <RadarChart parameters={monster.parameters} color={radarColor} />
         <div className="mt-4">
